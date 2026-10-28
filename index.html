@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A clinical learning resource on Parkinson's disease for medical, nursing, and allied health students and professionals."
+    />
+    <title>Parkinson’s | Clinical Learning Resource</title>
+    <!-- أيقونة تبويب المتصفح المطابقة لشعار الموقع -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link skip-content-link" href="#main">
+      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M12 5v14m-7-7 7 7 7-7"></path></svg>
+      <span>Skip to content</span>
+    </a>
+    <!-- قسم ترويسة الموقع وروابط التنقل -->
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Parkinson's clinical learning resource, home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span>Parkinson’s</span>
+      </a>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+        aria-label="Open navigation menu"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        <span>Menu</span>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <a href="#core-concepts">Core concepts</a>
+        <a href="#symptoms-and-manifestations">Symptoms and manifestations</a>
+        <a href="#clinical-history-and-examination">Clinical history and examination</a>
+        <a href="#differential-diagnosis">Differential diagnosis</a>
+        <a href="#medications">Medications</a>
+        <a href="#complications">Complications</a>
+        <a href="#care-team-roles">Roles across the care team</a>
+        <a href="#guidelines-and-professional-resources">Guidelines and professional resources</a>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark theme" title="Switch to dark theme">
+          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8a8.7 8.7 0 1 0 11.7 11.7Z"></path></svg>
+        </button>
+        <a class="header-cta" href="#guidelines-and-professional-resources">Further reading</a>
+      </div>
+    </header>
+    <!-- قسم القائمة الجانبية ولوحة متابعة التقدم -->
+    <aside class="app-sidebar" id="appSidebar" aria-label="Learning resource navigation" hidden>
+      <h2 class="sidebar-heading">Learning resource navigation</h2>
+      <nav class="sidebar-nav" id="sidebarNav" aria-label="Views" tabindex="-1"></nav>
+      <!-- لوحة تقدم المستخدم وزر إعادة ضبطه -->
+      <section class="learning-progress" aria-labelledby="progressTitle">
+        <h2 id="progressTitle">Your progress</h2>
+        <p id="progressCount" aria-live="polite">0 of 9 viewed</p>
+        <ul id="progressList"></ul>
+        <button type="button" id="resetProgress">Reset progress</button>
+      </section>
+      <nav class="sidebar-subnav" id="sidebarSubnav" aria-label="Current view topics" hidden></nav>
+    </aside>
+
+    <!-- أقسام المحتوى التعليمي والتنقل بين الصفحات -->
+    <main id="main">
+      <!-- الصفحة الرئيسية والبحث داخل المورد -->
+      <section class="hero section-shell" id="home" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> A practical clinical guide</p>
+          <h1 id="heroTitle">Parkinson’s disease<br /><em>from mechanism to practice.</em></h1>
+          <p class="hero-lead">
+            A structured resource for medical and nursing students and healthcare
+            professionals covering clinical features, examination, differential
+            diagnosis, treatment mechanisms, and complications.
+          </p>
+          <a class="hero-start-link" href="#core-concepts">
+            <span>Start with Core concepts</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+          </a>
+          <div class="search-area">
+            <form class="global-search" id="globalSearchForm" role="search">
+              <label for="globalSearch">Search this learning resource</label>
+              <div class="search-control">
+                <input
+                  id="globalSearch"
+                  type="search"
+                  placeholder="Search a symptom, diagnosis, medicine..."
+                  aria-describedby="searchHint"
+                  aria-controls="searchResults"
+                  aria-expanded="false"
+                  aria-autocomplete="list"
+                  role="combobox"
+                  autocomplete="off"
+                />
+                <button id="clearGlobalSearch" class="search-clear" type="button" aria-label="Clear search" title="Clear search" hidden>
+                  <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+                </button>
+                <button type="submit" aria-label="Search learning resource">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m16 16 4.5 4.5"></path></svg>
+                  <span>Search</span>
+                </button>
+              </div>
+              <p class="search-hint" id="searchHint">
+                Search across clinical topics and expandable sections.
+              </p>
+              <div class="search-suggestions" role="group" aria-label="Suggested searches">
+                <span>Explore:</span>
+                <button type="button" data-search-query="bradykinesia">Bradykinesia</button>
+                <button type="button" data-search-query="levodopa">Levodopa</button>
+                <button type="button" data-search-query="gait">Gait</button>
+                <button type="button" data-search-query="differential">Differential</button>
+              </div>
+            </form>
+            <div
+              id="searchResults"
+              class="search-results"
+              role="region"
+              aria-label="Search results"
+              hidden
+            ></div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="movement-visual">
+            <div class="movement-visual-heading">
+              <span class="movement-status"><span></span><b>Motor circuits</b></span>
+            </div>
+            <svg class="movement-illustration" viewBox="0 0 128 128" focusable="false">
+              <path class="brain-outline" d="M64 20c-7-9-21-8-26 1-11-2-20 7-19 18-10 5-13 18-6 27-6 10-2 22 8 27 1 11 12 18 23 15 5 8 14 9 20 3V20Zm0 0c7-9 21-8 26 1 11-2 20 7 19 18 10 5 13 18 6 27 6 10 2 22-8 27-1 11-12 18-23 15-5 8-14 9-20 3V20Z"></path>
+              <path class="brain-fold" d="M64 21v87M39 31c-5 4-6 10-2 15m-12 5c7 0 10 4 11 10m-5 15c6-3 11-1 13 5m-8 13c6-6 12-5 16-1m36-62c5 4 6 10 2 15m12 5c-7 0-10 4-11 10m5 15c-6-3-11-1-13 5m8 13c-6-6-12-5-16-1"></path>
+            </svg>
+            <div class="movement-caption">
+              <span class="movement-caption-mark"></span>
+              <span>Clinical features · assessment · management</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- تنبيه نطاق الاستخدام التعليمي -->
+      <section class="disclaimer-section top-disclaimer" aria-labelledby="topDisclaimerTitle">
+        <div class="section-shell disclaimer-content">
+          <div>
+            <p class="eyebrow">Scope and limitations</p>
+            <h2 id="topDisclaimerTitle">Education supports—not replaces—clinical judgment.</h2>
+          </div>
+          <p>
+            This resource is intended for medical and nursing students and
+            healthcare professionals. It is not a diagnostic service, prescribing
+            protocol, or substitute for supervised clinical training, current
+            guidance, or individual assessment.
+          </p>
+        </div>
+      </section>
+
+      <!-- ملخص نطاق المورد -->
+      <section class="trust-strip" aria-label="Resource scope">
+        <a class="trust-item" href="#core-concepts">
+          <span class="trust-item-illustration" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M12 4.2a4.3 4.3 0 0 0-7.3 3.1 4 4 0 0 0-.3 7.2 4.2 4.2 0 0 0 6.2 4V5.2"></path><path d="M12 4.2a4.3 4.3 0 0 1 7.3 3.1 4 4 0 0 1 .3 7.2 4.2 4.2 0 0 1-6.2 4V5.2M7.7 9.1c1.3 0 2.1.8 2.5 1.8m-2 4c1.1-.7 2.2-.6 3 .1m5.1-5.9c-1.3 0-2.1.8-2.5 1.8m2 4c-1.1-.7-2.2-.6-3 .1"></path></svg>
+          </span>
+          <span class="trust-item-copy"><strong>Clinical foundations</strong><span>Understand pathophysiology and phenotype</span></span>
+          <span class="trust-item-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="trust-item" href="#clinical-history-and-examination">
+          <span class="trust-item-illustration" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><rect x="5" y="4.5" width="14" height="17" rx="2.2"></rect><path d="M9 4.5V3h6v1.5M8.5 10h7m-7 4h3m-3 4h2m3-4 1.5 1.5L18 12"></path></svg>
+          </span>
+          <span class="trust-item-copy"><strong>Practical examination</strong><span>Learn how to assess and what to look for</span></span>
+          <span class="trust-item-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="trust-item" href="#medications">
+          <span class="trust-item-illustration" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d="M8.2 5.2a4.1 4.1 0 0 1 5.8 0l4.8 4.8a4.1 4.1 0 0 1-5.8 5.8L8.2 11a4.1 4.1 0 0 1 0-5.8Z"></path><path d="m9.3 14.7 5.4-5.4"></path></svg>
+          </span>
+          <span class="trust-item-copy"><strong>Mechanism-led treatment</strong><span>Connect drug mechanisms with clinical cautions</span></span>
+          <span class="trust-item-arrow" aria-hidden="true">→</span>
+        </a>
+      </section>
+
+      <!-- صفحة المفاهيم الأساسية -->
+      <section class="content-section section-shell" id="core-concepts">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> 01 · Foundations</p>
+            <h2>Core concepts</h2>
+          </div>
+          <p>
+            Open a topic to review its key concepts. Parkinson’s disease is a
+            clinical syndrome with motor and non-motor dimensions that evolve
+            variably over time.
+          </p>
+        </div>
+        <aside class="key-points" aria-label="Key points">
+          <h3>Key points</h3>
+          <ul>
+            <li>Parkinson’s disease is characterized clinically by bradykinesia with rest tremor and/or rigidity.</li>
+            <li>Reduced nigrostriatal dopamine alters basal-ganglia-thalamocortical activity.</li>
+            <li>Motor and non-motor features vary across individuals and over time.</li>
+          </ul>
+        </aside>
+        <figure class="diagram-card">
+          <svg class="pathway-diagram" viewBox="0 0 760 300" role="img" aria-labelledby="pathwayTitle pathwayDesc">
+            <defs><marker id="pathwayArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z"></path></marker></defs>
+            <title id="pathwayTitle">Direct and indirect basal ganglia pathways in normal and Parkinson’s disease states</title>
+            <desc id="pathwayDesc">A schematic based on the page text: normal dopamine supports the movement-facilitating direct pathway and balances the movement-suppressing indirect pathway. In Parkinson’s disease, reduced nigrostriatal dopamine is associated with relative underactivity of the direct pathway, overactivity of the indirect pathway, and reduced movement.</desc>
+            <rect class="diagram-panel" x="10" y="10" width="360" height="280" rx="14"></rect>
+            <rect class="diagram-panel" x="390" y="10" width="360" height="280" rx="14"></rect>
+            <text class="diagram-title" x="190" y="42" text-anchor="middle">Normal state</text>
+            <text class="diagram-title" x="570" y="42" text-anchor="middle">Parkinson’s disease state</text>
+            <text class="diagram-label" x="190" y="78" text-anchor="middle">Nigrostriatal dopamine</text>
+            <text class="diagram-label" x="570" y="78" text-anchor="middle">Reduced nigrostriatal dopamine</text>
+            <path class="diagram-arrow" d="M190 91v24"></path>
+            <path class="diagram-arrow" d="M570 91v24"></path>
+            <rect class="diagram-node" x="35" y="120" width="145" height="62" rx="10"></rect>
+            <rect class="diagram-node" x="200" y="120" width="145" height="62" rx="10"></rect>
+            <rect class="diagram-node" x="415" y="120" width="145" height="62" rx="10"></rect>
+            <rect class="diagram-node" x="580" y="120" width="145" height="62" rx="10"></rect>
+            <text class="diagram-label" x="107" y="145" text-anchor="middle"><tspan x="107">Direct pathway</tspan><tspan x="107" dy="18">movement-facilitating</tspan></text>
+            <text class="diagram-label" x="272" y="145" text-anchor="middle"><tspan x="272">Indirect pathway</tspan><tspan x="272" dy="18">movement-suppressing</tspan></text>
+            <text class="diagram-label" x="487" y="145" text-anchor="middle"><tspan x="487">Direct pathway</tspan><tspan x="487" dy="18">relative underactivity</tspan></text>
+            <text class="diagram-label" x="652" y="145" text-anchor="middle"><tspan x="652">Indirect pathway</tspan><tspan x="652" dy="18">relative overactivity</tspan></text>
+            <path class="diagram-arrow" d="M107 190v22"></path>
+            <path class="diagram-arrow" d="M272 190v22"></path>
+            <path class="diagram-arrow" d="M487 190v22"></path>
+            <path class="diagram-arrow" d="M652 190v22"></path>
+            <text class="diagram-outcome" x="190" y="245" text-anchor="middle">Movement facilitated and suppressed in balance</text>
+            <text class="diagram-outcome" x="570" y="245" text-anchor="middle">Reduced movement amplitude and speed</text>
+          </svg>
+          <figcaption>Pathway schematic: relative pathway activity described in the page’s pathophysiology summary.</figcaption>
+        </figure>
+        <div class="topic-grid">
+          <details class="topic-card">
+            <summary><span class="topic-icon">01</span><span><strong>Definition and pathophysiology</strong><small>Degeneration, dopamine, and circuit effects</small></span></summary>
+            <div class="topic-content">
+              <p>Parkinson’s disease (PD) is a progressive neurodegenerative disorder clinically characterized by bradykinesia with rest tremor and/or rigidity. Neuropathology commonly includes degeneration of dopaminergic neurons in the substantia nigra pars compacta and alpha-synuclein-containing Lewy pathology, although pathology and clinical expression are heterogeneous.</p>
+              <p>Reduced nigrostriatal dopamine alters basal-ganglia-thalamocortical activity. Relative underactivity of the direct, movement-facilitating pathway and overactivity of the indirect, movement-suppressing pathway contribute to reduced movement amplitude and speed. Non-dopaminergic systems are also involved, helping explain autonomic, sleep, cognitive, mood, sensory, and other non-motor features.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">02</span><span><strong>Clinical phenotype and course</strong><small>Heterogeneity, progression, and phenotype</small></span></summary>
+            <div class="topic-content">
+              <p>Clinical expression varies: tremor-dominant, akinetic-rigid, and mixed patterns are commonly described, but an individual may not fit one stable category. Asymmetry is frequent early in typical PD. Over time, motor fluctuations, postural instability, gait impairment, and non-motor burden may become more prominent.</p>
+              <p>Prodromal associations can include hyposmia, constipation, REM sleep behavior disorder, and mood changes. These features are not specific enough to establish PD on their own. Course, function, comorbidities, medication effects, and the person’s priorities all influence clinical assessment and management.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">03</span><span><strong>Clinical reasoning framework</strong><small>Syndrome first, cause second</small></span></summary>
+            <div class="topic-content">
+              <ol>
+                <li>Establish whether parkinsonism is present, particularly bradykinesia plus rigidity or rest tremor.</li>
+                <li>Characterize onset, tempo, symmetry, associated features, medication exposure, and functional impact.</li>
+                <li>Assess whether the pattern is compatible with idiopathic PD or suggests a mimic, secondary cause, or atypical parkinsonian syndrome.</li>
+                <li>Use investigations selectively to answer a defined clinical question; diagnosis remains primarily clinical.</li>
+              </ol>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- صفحة الأعراض والمظاهر -->
+      <section class="content-section section-tint" id="symptoms-and-manifestations">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> 02 · Clinical features</p>
+              <h2>Symptoms and manifestations</h2>
+            </div>
+            <p>
+              A structured review should cover motor and non-motor domains,
+              timing, severity, fluctuation, and impact on function.
+            </p>
+          </div>
+          <aside class="key-points" aria-label="Key points">
+            <h3>Key points</h3>
+            <ul>
+              <li>Bradykinesia includes slowness with decrement in amplitude or speed, or progressive hesitations.</li>
+              <li>Rest tremor is often distal and asymmetric, but is not present in every case.</li>
+              <li>Review autonomic, sleep, cognitive, psychiatric, sensory, pain, and bulbar features alongside motor symptoms.</li>
+            </ul>
+          </aside>
+          <aside class="red-flags" aria-label="Red flags">
+            <h3>Red flags</h3>
+            <p>Early recurrent falls are atypical for uncomplicated early Parkinson’s disease and warrant broader assessment.</p>
+          </aside>
+          <div class="topic-grid">
+            <details class="topic-card">
+              <summary><span class="topic-icon">M</span><span><strong>Motor features</strong><small>Bradykinesia, rigidity, tremor, gait, posture</small></span></summary>
+              <div class="topic-content">
+                <h3>Bradykinesia</h3>
+                <p>Slowness is accompanied by decrement in amplitude or speed, or progressive hesitations, during repetitive movement. It may present as reduced spontaneous movement, smaller handwriting, reduced facial expression, hypophonia, difficulty initiating movement, or reduced arm swing. Slowness alone is not sufficient: weakness, pain, apraxia, depression, and other causes should be considered.</p>
+                <h3>Rigidity</h3>
+                <p>Increased resistance to passive movement through the range, often relatively uniform and sometimes cogwheel-like when tremor is superimposed. It may affect axial and limb muscles and can contribute to stiffness, reduced rotation, and discomfort.</p>
+                <h3>Rest tremor</h3>
+                <p>Often distal, asymmetric, and most apparent when the limb is supported and relaxed. It may lessen with voluntary movement and re-emerge after maintaining a posture. Tremor is not present in every case and can be amplified by stress, attention, or fatigue.</p>
+                <h3>Gait and postural control</h3>
+                <p>Possible findings include stooped posture, reduced stride length, shuffling, reduced arm swing, en-bloc turning, start hesitation, freezing (especially at doorways or turns), and impaired postural responses. Early recurrent falls are atypical for uncomplicated early PD and warrant broader assessment.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">N</span><span><strong>Non-motor features</strong><small>Autonomic, sleep, cognitive, mood, sensory</small></span></summary>
+              <div class="topic-content">
+                <ul>
+                  <li><strong>Autonomic:</strong> constipation, urinary urgency or frequency, erectile dysfunction, sweating changes, drooling, and orthostatic symptoms.</li>
+                  <li><strong>Sleep:</strong> REM sleep behavior disorder, insomnia, fragmented sleep, restless legs, nocturia, and excessive daytime sleepiness.</li>
+                  <li><strong>Cognitive and psychiatric:</strong> executive or visuospatial difficulty, slowed processing, depression, anxiety, apathy, hallucinations, and—in some cases—cognitive impairment or dementia.</li>
+                  <li><strong>Sensory and pain:</strong> hyposmia, pain, paresthesia, and fatigue may occur and can precede or accompany motor features.</li>
+                  <li><strong>Bulbar:</strong> hypophonia, reduced prosody, dysarthria, drooling, and dysphagia can affect communication, nutrition, and airway safety.</li>
+                </ul>
+                <p>Ask directly and non-judgmentally: many non-motor symptoms are under-reported, may have multiple causes, and may be more disabling than the visible motor syndrome.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">↕</span><span><strong>Fluctuations and dyskinesia</strong><small>Relate symptoms to medication timing</small></span></summary>
+              <div class="topic-content">
+                <p>With disease progression and repeated levodopa exposure, some individuals develop predictable wearing-off before the next dose, delayed-on or dose failures, and unpredictable OFF periods. Ask about the timing of mobility, stiffness, tremor, dystonia, and non-motor symptoms in relation to each dose, meals, sleep, and activity.</p>
+                <p>Levodopa-induced dyskinesia refers to involuntary choreiform or dystonic movements associated with dopaminergic treatment. It may occur near peak drug effect, during transitions, or in other patterns. Distinguish dyskinesia from tremor, akathisia, dystonia, and dyskinesia due to other causes; document phenomenology and timing rather than relying on the label alone.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- صفحة التاريخ المرضي والفحص السريري -->
+      <section class="content-section section-shell" id="clinical-history-and-examination">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> 03 · Examination</p>
+            <h2>Clinical history and examination</h2>
+          </div>
+          <p>
+            A careful, reproducible examination documents the syndrome,
+            asymmetry, severity, function, and features that may point away from
+            typical PD.
+          </p>
+        </div>
+        <aside class="key-points" aria-label="Key points">
+          <h3>Key points</h3>
+          <ul>
+            <li>Establish onset, progression, laterality, functional impact, medication exposure, and symptom timing.</li>
+            <li>Test repetitive movements for decrement, compare sides, and distinguish slowness from bradykinesia.</li>
+            <li>Examine eye movements, gait, postural responses, and associated neurological signs.</li>
+          </ul>
+        </aside>
+        <aside class="red-flags" aria-label="Red flags">
+          <h3>Red flags</h3>
+          <p>Early prominent postural-response impairment and vertical gaze limitation may point away from typical Parkinson’s disease; interpret these alongside the full assessment.</p>
+        </aside>
+        <div class="topic-grid">
+          <details class="topic-card">
+            <summary><span class="topic-icon">H</span><span><strong>History-taking</strong><small>Onset, evolution, medicines, and functional impact</small></span></summary>
+            <div class="topic-content">
+              <p>Establish the first symptom, the sequence and rate of progression, laterality at onset, variability during the day, and circumstances that worsen or relieve symptoms. Ask about tremor at rest and during action, slowness, stiffness, gait change, falls, freezing, dexterity, handwriting, speech, swallowing, sleep, mood, cognition, autonomic symptoms, pain, and smell.</p>
+              <p>Take a complete prescribed, over-the-counter, and substance history with start dates and dose changes. Specifically consider dopamine-receptor blocking medicines and other agents associated with parkinsonism or tremor. Review vascular risks, head injury, relevant family history, comorbidities, and examination context. Do not infer causation from a medicine list alone.</p>
+              <p>Clarify medication response and timing if dopaminergic therapy is already used. A symptom and dose-time record can help characterize fluctuations, but it is not a substitute for direct assessment. Record baseline mobility, activities, cognition, and goals using a consistent clinical framework.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">1</span><span><strong>General observation and speech</strong><small>Observe before formal motor testing</small></span></summary>
+            <div class="topic-content">
+              <p>Observe spontaneous movement while the person is seated, entering the room, and conversing. Note facial animation, blink rate, posture, spontaneous gestures, turning, voice volume, articulation, prosody, and whether movements are reduced on one side. Allow sufficient time: findings may be subtle and can change with attention or anxiety.</p>
+              <p>Listen for hypophonia, monotony, reduced articulation, and palilalia. Assess facial expression and spontaneous blink without assuming that a masked appearance reflects mood. Record whether speech and facial animation change with cueing or effort.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">2</span><span><strong>Bradykinesia examination</strong><small>Repetitive movements and decrement</small></span></summary>
+            <div class="topic-content">
+              <p>Demonstrate each movement, then ask for repeated, as-large-and-fast-as-possible movements while the person is seated and supported. Test finger tapping, hand opening and closing, pronation-supination, toe tapping, and heel tapping on both sides. Observe speed, amplitude, rhythm, hesitations, arrests, and progressive decrement; compare sides and repeat if comprehension or effort is uncertain.</p>
+              <p>A pattern aligned with parkinsonian bradykinesia is progressive reduction in amplitude or speed, or increasing pauses across repetitions, often with asymmetry. Simple slowness without decrement is less specific. Pain, arthritis, weakness, sensory loss, apraxia, fatigue, and inattention can affect performance and should be documented.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">3</span><span><strong>Tone and rigidity</strong><small>Passive movement at relaxed joints</small></span></summary>
+            <div class="topic-content">
+              <p>Ask the person to relax. Support the limb and passively move the wrist, elbow, and other joints through flexion-extension and pronation-supination, comparing sides and testing at more than one speed. If resistance is subtle, ask for a contralateral repetitive movement (an activation maneuver) while continuing to assess the relaxed limb.</p>
+              <p>Rigidity is a velocity-independent increase in resistance, often present through the range; cogwheeling may be felt when tremor overlays rigidity. Distinguish this from spasticity (typically velocity-dependent with a catch), paratonia, contracture, pain-limited movement, and voluntary resistance. Document distribution and asymmetry.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">4</span><span><strong>Tremor assessment</strong><small>Rest, posture, action, and re-emergence</small></span></summary>
+            <div class="topic-content">
+              <p>Observe hands fully supported in the lap and feet supported, first at rest and then during conversation or a cognitive distraction task. Look for rhythmic tremor, distribution, frequency impression, and asymmetry. Next assess arms outstretched and in a posture that requires maintaining position; note latency before any re-emergent tremor.</p>
+              <p>Assess kinetic tremor during finger-to-nose and functional reach, and observe handwriting or spiral drawing when useful. A classic parkinsonian tremor is often most evident at rest and may re-emerge after a delay during posture; essential tremor is commonly postural or kinetic. These patterns overlap and are not diagnostic in isolation.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">5</span><span><strong>Gait, turning, and postural responses</strong><small>Guard safely and describe specific findings</small></span></summary>
+            <div class="topic-content">
+              <p>With appropriate space and guarding, observe rising from a chair, initiation, straight walking, turning, and return. Note base, stride length, speed, cadence, foot clearance, freezing, arm swing, posture, and turning strategy. Ask about freezing triggers; if appropriate and safe, observe a turn or passage through a doorway. Do not provoke a fall to demonstrate a deficit.</p>
+              <p>A pull test is performed only by a trained examiner with adequate space and close guarding: explain the maneuver, stand behind, and give a brief, firm backward tug at the shoulders. Observe corrective steps and need for assistance. Abnormal postural responses can occur in PD, but early prominent impairment is a diagnostic warning sign. Omit the test when unsafe and document why.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">6</span><span><strong>Additional neurological and functional examination</strong><small>Look for associated signs and alternative localization</small></span></summary>
+            <div class="topic-content">
+              <p>Assess eye movements, especially vertical saccades and gaze range; cerebellar function; pyramidal signs; strength; sensation; coordination; reflexes; and postural alignment. Look for focal weakness, limb apraxia, cortical sensory loss, cerebellar ataxia, pyramidal signs, or supranuclear gaze limitation, which may indicate an alternative or additional disorder.</p>
+              <p>Measure orthostatic blood pressure when indicated: rest supine for several minutes, record blood pressure and pulse, then repeat after standing (commonly at 1 and 3 minutes), with assistance and symptom monitoring. A sustained fall of at least 20 mmHg systolic or 10 mmHg diastolic within 3 minutes is a conventional definition of orthostatic hypotension; interpretation depends on context and local protocol.</p>
+              <p>Assess cognition, mood, speech, swallowing, and activities of daily living when clinically relevant. Use validated instruments only with appropriate training, permissions, and interpretation. Consider a supervised ON/OFF assessment when clinically indicated; document medication timing and avoid unsupervised medication withdrawal.</p>
+            </div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">7</span><span><strong>Investigations and diagnostic criteria</strong><small>Target tests to the diagnostic question</small></span></summary>
+            <div class="topic-content">
+              <p>PD is diagnosed clinically by an appropriately trained specialist using accepted criteria and longitudinal review where needed. The core parkinsonian syndrome requires bradykinesia plus rest tremor or rigidity. A response to dopaminergic therapy may support the assessment but is not, by itself, proof of idiopathic PD.</p>
+              <p>Structural MRI is not a confirmatory test for PD; it may help assess alternative causes when the history or examination is atypical. Dopamine-transporter SPECT can help distinguish presynaptic dopaminergic deficit from some non-degenerative tremor disorders when uncertainty remains, but it does not reliably distinguish PD from other degenerative parkinsonian syndromes. Routine laboratory tests are guided by clinical suspicion, not a universal PD panel.</p>
+            </div>
+          </details>
+        </div>
+        <aside class="callout callout-neutral">
+          <strong>Examination principle</strong>
+          <p>Interpret each finding in context. A single sign, scan, or medication response should not replace a complete history, neurological examination, review of medicines, and appropriate specialist judgment.</p>
+        </aside>
+      </section>
+
+      <!-- صفحة التشخيص التفريقي -->
+      <section class="content-section section-tint" id="differential-diagnosis">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> 04 · Diagnostic reasoning</p>
+              <h2>Differential diagnosis</h2>
+            </div>
+            <p>
+              Expand each diagnostic group for distinguishing clues and
+              practical considerations. No single feature is definitive.
+            </p>
+          </div>
+          <aside class="key-points" aria-label="Key points">
+            <h3>Key points</h3>
+            <ul>
+              <li>Compare tremor phenomenology, symmetry, tempo, associated features, and medication exposure.</li>
+              <li>Early recurrent falls, severe early autonomic failure, vertical gaze limitation, or cerebellar signs warrant reconsideration.</li>
+              <li>No single feature or levodopa response is definitive; interpret findings in the complete clinical pattern.</li>
+            </ul>
+          </aside>
+          <div class="table-wrap differential-table-wrap" role="region" aria-label="Differential diagnosis comparison table" tabindex="0">
+            <table class="comparison-table">
+              <caption>Comparison of clinical clues described in this resource. A dash means the page does not specify that feature.</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Condition</th>
+                  <th scope="col">Tremor type</th>
+                  <th scope="col">Asymmetry</th>
+                  <th scope="col">Early falls</th>
+                  <th scope="col">Eye movements</th>
+                  <th scope="col">Autonomic features</th>
+                  <th scope="col">Cognition / hallucinations</th>
+                  <th scope="col">Levodopa response</th>
+                  <th scope="col">Key clue</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Parkinson’s disease</th>
+                  <td>Often rest tremor</td>
+                  <td>Asymmetry frequent early</td>
+                  <td>Early recurrent falls atypical</td>
+                  <td>—</td>
+                  <td>Constipation, urinary symptoms, orthostatic symptoms</td>
+                  <td>Cognitive impairment and hallucinations may occur</td>
+                  <td>Improves bradykinesia and rigidity, often tremor</td>
+                  <td>Bradykinesia with rest tremor and/or rigidity</td>
+                </tr>
+                <tr>
+                  <th scope="row">Essential tremor</th>
+                  <td>Typically postural and kinetic</td>
+                  <td>Often bilateral</td>
+                  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>May involve head or voice</td>
+                </tr>
+                <tr>
+                  <th scope="row">Drug-induced parkinsonism</th>
+                  <td>Tremor may occur</td>
+                  <td>Often more symmetric; asymmetry does not exclude contribution</td>
+                  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>Onset after medicine initiation or dose escalation</td>
+                </tr>
+                <tr>
+                  <th scope="row">Vascular parkinsonism</th>
+                  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>Vascular burden, stepwise or linked decline, lower-body involvement</td>
+                </tr>
+                <tr>
+                  <th scope="row">Progressive supranuclear palsy (PSP)</th>
+                  <td>—</td><td>—</td>
+                  <td>Early unexplained falls</td>
+                  <td>Slowed vertical saccades or supranuclear vertical gaze palsy</td>
+                  <td>—</td>
+                  <td>Frontal-executive change</td>
+                  <td>Often limited; response varies</td>
+                  <td>Axial rigidity with early falls or vertical gaze findings</td>
+                </tr>
+                <tr>
+                  <th scope="row">Multiple system atrophy (MSA)</th>
+                  <td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>Prominent or early autonomic failure</td>
+                  <td>—</td><td>—</td>
+                  <td>Urinary retention, orthostatic hypotension, cerebellar signs, or stridor</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dementia with Lewy bodies (DLB)</th>
+                  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>Dementia near onset, fluctuations, recurrent visual hallucinations</td>
+                  <td>—</td>
+                  <td>Dementia before or around onset of parkinsonism</td>
+                </tr>
+                <tr>
+                  <th scope="row">Corticobasal syndrome</th>
+                  <td>—</td>
+                  <td>Asymmetric rigidity, bradykinesia, or dystonia</td>
+                  <td>—</td><td>—</td><td>—</td>
+                  <td>Language or visuospatial impairment</td><td>—</td>
+                  <td>Limb apraxia, cortical sensory loss, alien-limb phenomena, or myoclonus</td>
+                </tr>
+                <tr>
+                  <th scope="row">Normal-pressure hydrocephalus (NPH)</th>
+                  <td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td>Urinary urgency</td>
+                  <td>Cognitive change</td><td>—</td>
+                  <td>Broad-based or magnetic gait with ventriculomegaly</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="topic-grid">
+            <details class="topic-card">
+              <summary><span class="topic-icon">D1</span><span><strong>Essential tremor</strong><small>Action tremor versus rest-predominant tremor</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> tremor may impair hand function and can coexist with other movement disorders.</p>
+                <p><strong>Clues:</strong> essential tremor is typically postural and kinetic, often bilateral, and may involve the head or voice. Parkinsonian tremor is often asymmetric and prominent at rest, with bradykinesia or rigidity.</p>
+                <p><strong>Clinical considerations:</strong> characterize tremor at rest, posture, and action; examine for decrement, rigidity, gait change, and family history. Tremor phenomenology alone may remain inconclusive.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D2</span><span><strong>Drug-induced parkinsonism</strong><small>Medication exposure and temporal association</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> bradykinesia and rigidity can closely resemble PD; tremor may occur.</p>
+                <p><strong>Clues:</strong> dopamine-receptor blocking antipsychotics and antiemetics are important causes. Onset may follow initiation or dose escalation, and findings are often more symmetric, though asymmetry does not exclude a drug contribution.</p>
+                <p><strong>Clinical considerations:</strong> reconcile all medicines and dates, assess for underlying neurodegeneration unmasked by exposure, and coordinate any medication change with the responsible prescriber. Do not stop or alter essential medicines abruptly.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D3</span><span><strong>Vascular parkinsonism</strong><small>Vascular burden and lower-body gait pattern</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> gait slowness, short steps, postural instability, and lower-body bradykinesia.</p>
+                <p><strong>Clues:</strong> cerebrovascular risk, stepwise or temporally linked decline, pyramidal signs, and prominent lower-body involvement may be relevant. Imaging may show vascular disease but findings must match the clinical syndrome.</p>
+                <p><strong>Clinical considerations:</strong> consider coexisting PD and vascular disease. MRI helps assess structural burden and alternative diagnoses; incidental vascular changes alone do not establish causation.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D4</span><span><strong>Progressive supranuclear palsy</strong><small>Early falls, axial features, and vertical gaze</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> akinetic-rigid parkinsonism, reduced facial expression, and gait impairment.</p>
+                <p><strong>Clues:</strong> early unexplained falls, axial rigidity, slowed vertical saccades or supranuclear vertical gaze palsy, dysarthria, and frontal-executive change should raise suspicion.</p>
+                <p><strong>Clinical considerations:</strong> examine vertical eye movements and postural responses. Levodopa response is often limited, but response varies and should not be used as the sole discriminator.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D5</span><span><strong>Multiple system atrophy</strong><small>Autonomic failure with parkinsonism or ataxia</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> parkinsonism may be the dominant early feature; cerebellar features can also occur.</p>
+                <p><strong>Clues:</strong> prominent or early autonomic failure, urinary retention, orthostatic hypotension, cerebellar signs, stridor, and rapid progression warrant specialist consideration.</p>
+                <p><strong>Clinical considerations:</strong> assess autonomic symptoms and signs systematically and investigate alternatives. Autonomic dysfunction is also possible in PD, so timing, severity, and the complete pattern matter.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D6</span><span><strong>Dementia with Lewy bodies</strong><small>Cognition, hallucinations, fluctuations, parkinsonism</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> parkinsonism, cognitive impairment, visual hallucinations, and REM sleep behavior disorder may occur in both disorders.</p>
+                <p><strong>Clues:</strong> dementia that begins before or around the same time as parkinsonism, marked cognitive fluctuations, recurrent visual hallucinations, and visuospatial impairment are characteristic diagnostic considerations.</p>
+                <p><strong>Clinical considerations:</strong> apply accepted criteria and document the timeline carefully. Review medicines and avoid assuming that hallucinations or cognitive symptoms have a single cause.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D7</span><span><strong>Corticobasal syndrome</strong><small>Asymmetry with cortical features</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> asymmetric rigidity, bradykinesia, dystonia, and limb dysfunction.</p>
+                <p><strong>Clues:</strong> limb apraxia, cortical sensory loss, alien-limb phenomena, myoclonus, and language or visuospatial impairment suggest cortical involvement.</p>
+                <p><strong>Clinical considerations:</strong> the syndrome has multiple possible underlying pathologies. Look for cortical signs rather than attributing marked asymmetry alone to this diagnosis.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">D8</span><span><strong>Normal-pressure hydrocephalus and other mimics</strong><small>Gait, cognition, urinary symptoms, and structural causes</small></span></summary>
+              <div class="topic-content">
+                <p><strong>Overlap:</strong> gait initiation difficulty, short steps, falls, and cognitive change.</p>
+                <p><strong>Clues:</strong> a broad-based or magnetic gait and urinary urgency with ventriculomegaly may prompt assessment for normal-pressure hydrocephalus. Cervical myelopathy, cerebellar disease, neuropathy, functional movement disorder, and medication effects can also mimic parts of PD.</p>
+                <p><strong>Clinical considerations:</strong> use examination localization, tempo, associated signs, and appropriately selected imaging or tests. Consider more than one diagnosis when the pattern is mixed.</p>
+              </div>
+            </details>
+          </div>
+          <aside class="red-flags differential-red-flags">
+            <h3>Red flags and reassessment</h3>
+            <div class="topic-content">
+              <ul>
+                <li><strong>Reconsider the diagnosis</strong> with rapid progression, early recurrent falls, severe early autonomic failure, early bulbar or respiratory symptoms, vertical gaze limitation, cerebellar signs, pyramidal signs, or prominent cognitive change at onset.</li>
+                <li><strong>Review medications and comorbidity</strong> at every reassessment; vascular, musculoskeletal, sensory, cognitive, and psychiatric contributors can coexist with parkinsonism.</li>
+                <li><strong>Interpret treatment response cautiously:</strong> inadequate response can reflect dose timing, absorption, adherence, advanced axial symptoms, or an alternative syndrome; apparent response is not uniquely diagnostic of PD.</li>
+                <li><strong>Use investigations to resolve a question,</strong> not to replace clinical reasoning. Imaging abnormalities may be incidental, and normal imaging does not confirm PD.</li>
+                <li><strong>Seek specialist input</strong> when diagnosis is uncertain, features are atypical, progression is unexpected, or treatment complications are complex. Follow applicable local referral pathways and urgent-care protocols.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+        <!-- اختبار ذاتي ضمن صفحة التشخيص التفريقي -->
+        <section class="self-check" aria-labelledby="differentialCheckTitle">
+          <h3 id="differentialCheckTitle">Differential diagnosis self-check</h3>
+          <details class="self-check-item">
+            <summary>Which tremor pattern is described as typical of essential tremor?</summary>
+            <p><strong>Answer:</strong> Typically postural and kinetic, often bilateral, and it may involve the head or voice.</p>
+            <p><strong>Why:</strong> Tremor phenomenology helps distinguish patterns but may remain inconclusive on its own.</p>
+          </details>
+          <details class="self-check-item">
+            <summary>Which findings should raise suspicion for PSP?</summary>
+            <p><strong>Answer:</strong> Early unexplained falls, axial rigidity, slowed vertical saccades or supranuclear vertical gaze palsy, dysarthria, and frontal-executive change.</p>
+            <p><strong>Why:</strong> These are the distinguishing clues listed in the PSP topic.</p>
+          </details>
+          <details class="self-check-item">
+            <summary>What timing may suggest drug-induced parkinsonism?</summary>
+            <p><strong>Answer:</strong> Onset after starting or increasing a dopamine-receptor blocking medicine.</p>
+            <p><strong>Why:</strong> Medication dates and the full clinical pattern should be reviewed; a medicine list alone does not prove causation.</p>
+          </details>
+          <details class="self-check-item">
+            <summary>What timeline is a key diagnostic consideration for DLB?</summary>
+            <p><strong>Answer:</strong> Dementia begins before or around the same time as parkinsonism.</p>
+            <p><strong>Why:</strong> Cognitive fluctuations and recurrent visual hallucinations are also described as important clues.</p>
+          </details>
+          <details class="self-check-item">
+            <summary>Which combination may prompt assessment for NPH?</summary>
+            <p><strong>Answer:</strong> Broad-based or magnetic gait and urinary urgency with ventriculomegaly.</p>
+            <p><strong>Why:</strong> The page lists this combination as a clue for further assessment.</p>
+          </details>
+        </section>
+      </section>
+
+      <!-- صفحة الأدوية -->
+      <section class="content-section section-shell" id="medications">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> 05 · Pharmacology</p>
+            <h2>Medications</h2>
+          </div>
+          <p>
+            Each expandable card summarizes mechanism, clinical role, and key
+            cautions. Selection and adjustment require individual assessment
+            and current local prescribing guidance.
+          </p>
+        </div>
+        <aside class="key-points" aria-label="Key points">
+          <h3>Key points</h3>
+          <ul>
+            <li>Levodopa is converted to dopamine in the brain; carbidopa and benserazide inhibit peripheral conversion.</li>
+            <li>Several medication classes modify dopamine signaling, dopamine breakdown, or related pathways.</li>
+            <li>Selection requires individual assessment; this resource intentionally omits doses.</li>
+          </ul>
+        </aside>
+        <p class="medication-note">Educational overview only; doses are omitted. Confirm use and monitoring in current local guidance with a qualified prescriber.</p>
+        <aside class="red-flags" aria-label="Medication safety summary">
+          <h3>Safety summary</h3>
+          <p>Avoid abrupt levodopa withdrawal; check medicine interactions, monitor relevant adverse effects, and follow current specialist and product guidance.</p>
+        </aside>
+        <figure class="diagram-card medication-diagram-card">
+          <svg class="medication-diagram" viewBox="0 0 760 310" role="img" aria-labelledby="medDiagramTitle medDiagramDesc">
+            <defs><marker id="medicationArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z"></path></marker></defs>
+            <title id="medDiagramTitle">Schematic of Parkinson’s medication mechanisms</title>
+            <desc id="medDiagramDesc">Levodopa crosses into the brain and is converted to dopamine. Carbidopa and benserazide inhibit peripheral conversion. Dopamine agonists stimulate dopamine receptors. MAO-B inhibitors reduce central dopamine breakdown. COMT inhibitors reduce levodopa methylation, with site differing by agent.</desc>
+            <rect class="diagram-panel" x="12" y="14" width="240" height="275" rx="14"></rect>
+            <rect class="diagram-panel brain-panel" x="270" y="14" width="478" height="275" rx="14"></rect>
+            <text class="diagram-title" x="132" y="44" text-anchor="middle">Peripheral tissues</text>
+            <text class="diagram-title" x="509" y="44" text-anchor="middle">Brain</text>
+            <rect class="diagram-node" x="35" y="83" width="195" height="70" rx="10"></rect>
+            <text class="diagram-label" x="132" y="108" text-anchor="middle"><tspan x="132">Carbidopa / benserazide</tspan><tspan x="132" dy="18">inhibit peripheral conversion</tspan></text>
+            <text class="diagram-small" x="132" y="137" text-anchor="middle">of levodopa to dopamine</text>
+            <rect class="diagram-node" x="35" y="184" width="195" height="74" rx="10"></rect>
+            <text class="diagram-label" x="132" y="209" text-anchor="middle"><tspan x="132">COMT inhibitors</tspan><tspan x="132" dy="18">reduce levodopa methylation</tspan></text>
+            <text class="diagram-small" x="132" y="240" text-anchor="middle">site varies by agent</text>
+            <path class="diagram-arrow" d="M230 117h73"></path>
+            <text class="diagram-small" x="266" y="105" text-anchor="middle">levodopa</text>
+            <rect class="diagram-node" x="315" y="83" width="170" height="70" rx="10"></rect>
+            <text class="diagram-label" x="400" y="110" text-anchor="middle"><tspan x="400">Levodopa</tspan><tspan x="400" dy="19">converted to dopamine</tspan></text>
+            <path class="diagram-arrow" d="M485 117h45"></path>
+            <rect class="diagram-node" x="535" y="83" width="180" height="70" rx="10"></rect>
+            <text class="diagram-label" x="625" y="110" text-anchor="middle"><tspan x="625">Dopamine</tspan><tspan x="625" dy="19">dopamine signaling</tspan></text>
+            <rect class="diagram-node" x="315" y="184" width="170" height="70" rx="10"></rect>
+            <text class="diagram-label" x="400" y="211" text-anchor="middle"><tspan x="400">MAO-B inhibitors</tspan><tspan x="400" dy="19">reduce dopamine breakdown</tspan></text>
+            <rect class="diagram-node" x="535" y="184" width="180" height="70" rx="10"></rect>
+            <text class="diagram-label" x="625" y="211" text-anchor="middle"><tspan x="625">Dopamine agonists</tspan><tspan x="625" dy="19">stimulate dopamine receptors</tspan></text>
+            <path class="diagram-arrow" d="M625 184v-19"></path>
+          </svg>
+          <figcaption>Mechanism schematic based on the medication descriptions below; COMT inhibitor sites differ by agent.</figcaption>
+        </figure>
+        <div class="medication-filters" aria-label="Filter medication topics">
+          <label class="field-label" for="medicationSearch">Search medication names or details</label>
+          <input class="text-input" id="medicationSearch" type="search" placeholder="Search medication or mechanism" aria-describedby="medicationCount" />
+          <fieldset class="filter-group">
+            <legend>Filter by class</legend>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="levodopa" aria-pressed="false">Levodopa combinations</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="agonist" aria-pressed="false">Dopamine agonists</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="mao-b" aria-pressed="false">MAO-B inhibitors</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="comt" aria-pressed="false">COMT inhibitors</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="amantadine" aria-pressed="false">Amantadine</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="anticholinergic" aria-pressed="false">Anticholinergics</button>
+            <button type="button" class="filter-chip" data-filter-group="class" data-filter-value="a2a" aria-pressed="false">Adenosine A2A antagonist</button>
+          </fieldset>
+          <fieldset class="filter-group">
+            <legend>Filter by mechanism</legend>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="precursor" aria-pressed="false">Dopamine precursor</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="receptor-stimulation" aria-pressed="false">Receptor stimulation</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="dopamine-breakdown" aria-pressed="false">Dopamine breakdown</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="levodopa-methylation" aria-pressed="false">Levodopa methylation</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="glutamatergic" aria-pressed="false">Glutamatergic modulation</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="muscarinic" aria-pressed="false">Muscarinic antagonism</button>
+            <button type="button" class="filter-chip" data-filter-group="mechanism" data-filter-value="adenosine" aria-pressed="false">Adenosine A2A antagonism</button>
+          </fieldset>
+          <fieldset class="filter-group">
+            <legend>Filter by key adverse effect</legend>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="nausea" aria-pressed="false">Nausea</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="dyskinesia" aria-pressed="false">Dyskinesia</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="hallucinations" aria-pressed="false">Hallucinations / confusion</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="sleep" aria-pressed="false">Sleep effects</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="impulse-control" aria-pressed="false">Impulse-control disorders</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="hepatic" aria-pressed="false">Hepatic risk</button>
+            <button type="button" class="filter-chip" data-filter-group="effect" data-filter-value="cognitive-anticholinergic" aria-pressed="false">Cognitive / anticholinergic effects</button>
+          </fieldset>
+          <div class="filter-status">
+            <p id="medicationCount" role="status" aria-live="polite">7 medication classes</p>
+            <button type="button" id="resetMedicationFilters">Reset filters</button>
+          </div>
+        </div>
+        <div class="table-wrap medication-table-wrap" role="region" aria-label="Medication class comparison table" tabindex="0">
+          <table class="comparison-table medication-comparison">
+            <caption>Medication class overview from the page content; doses are intentionally omitted.</caption>
+            <thead><tr><th scope="col">Class</th><th scope="col">Site of action</th><th scope="col">Main role</th><th scope="col">Key cautions</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Levodopa with carbidopa or benserazide</th><td>Levodopa crosses into the brain; carbidopa and benserazide inhibit peripheral enzyme activity</td><td>Improves bradykinesia and rigidity, often tremor</td><td>Wearing-off, dyskinesia, nausea, orthostatic symptoms, hallucinations, sleepiness; avoid abrupt withdrawal</td></tr>
+              <tr><th scope="row">Dopamine receptor agonists</th><td>Dopamine receptors, particularly D2-like pathways</td><td>Motor symptom reduction; selected monotherapy or adjunct for OFF time</td><td>Nausea, edema, orthostatic hypotension, hallucinations, sleep episodes, impulse-control disorders</td></tr>
+              <tr><th scope="row">MAO-B inhibitors</th><td>Central dopamine breakdown</td><td>Modest symptomatic benefit or adjunct to reduce OFF time</td><td>Interactions; insomnia with selegiline; dyskinesia may increase with levodopa</td></tr>
+              <tr><th scope="row">COMT inhibitors</th><td>Predominantly peripheral; tolcapone also acts centrally</td><td>Adjunct for selected motor fluctuations; may extend ON time with levodopa</td><td>Dyskinesia, diarrhea, nausea, hypotension, urine discoloration; serious hepatic risk with tolcapone</td></tr>
+              <tr><th scope="row">Amantadine</th><td>NMDA-receptor antagonism and dopaminergic modulation are thought to contribute</td><td>May reduce levodopa-induced dyskinesia</td><td>Confusion, hallucinations, edema, livedo reticularis, sleep disturbance; renal clearance matters</td></tr>
+              <tr><th scope="row">Anticholinergic agents</th><td>Central muscarinic receptors</td><td>Limited selective use for tremor-dominant symptoms</td><td>Confusion, memory impairment, blurred vision, constipation, urinary retention, heat intolerance</td></tr>
+              <tr><th scope="row">Adenosine A2A receptor antagonist</th><td>Striatal neurons in the indirect basal ganglia pathway</td><td>Adjunct to levodopa for selected OFF episodes</td><td>Dyskinesia, insomnia, hallucinations; check local authorization and interactions</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="topic-grid medication-topics" id="medicationGrid">
+          <details class="topic-card medication-card" data-class="levodopa" data-mechanism="precursor" data-effects="nausea dyskinesia hallucinations sleep" data-search="levodopa carbidopa benserazide dopa decarboxylase dopamine precursor">
+            <summary><span class="topic-icon">Rx</span><span><strong>Levodopa with carbidopa or benserazide</strong><small>Dopamine replacement · most effective motor symptomatic therapy</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> levodopa is a dopamine precursor that crosses the blood-brain barrier and is converted to dopamine by aromatic L-amino acid decarboxylase. Carbidopa and benserazide inhibit this enzyme mainly in peripheral tissues, increasing the fraction of levodopa reaching the brain and reducing peripheral dopamine-related adverse effects.</p>
+              <p><strong>Clinical role:</strong> improves bradykinesia and rigidity and often tremor. It does not stop neurodegeneration. Formulations and routes differ; response may be affected by gastric emptying, dietary protein competition, and dose timing.</p>
+              <p><strong>Clinical considerations:</strong> monitor motor benefit, wearing-off, dyskinesia, nausea, orthostatic symptoms, hallucinations, and sleepiness. Long-term use can be associated with motor fluctuations and dyskinesia, reflecting disease progression and changing dopaminergic responsiveness—not addiction. Avoid abrupt withdrawal; follow specialist and product guidance.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="agonist" data-mechanism="receptor-stimulation" data-effects="nausea hallucinations sleep impulse-control" data-search="pramipexole ropinirole rotigotine apomorphine dopamine agonist d2 d3 receptor">
+            <summary><span class="topic-icon">D</span><span><strong>Dopamine receptor agonists</strong><small>Pramipexole · ropinirole · rotigotine · apomorphine</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> these agents directly stimulate dopamine receptors, particularly D2-like receptor pathways, without requiring conversion from levodopa. Apomorphine is a potent dopamine agonist used in selected specialist-led settings, including rescue or infusion approaches depending on local practice.</p>
+              <p><strong>Clinical role:</strong> can reduce motor symptoms and may be used as monotherapy in selected cases or as an adjunct for OFF time. Delivery differs by agent: oral, transdermal, or subcutaneous preparations are used.</p>
+              <p><strong>Clinical considerations:</strong> nausea, edema, orthostatic hypotension, hallucinations, sudden sleep episodes, and impulse-control disorders are important risks. Screen for gambling, compulsive shopping, hypersexuality, binge eating, and other behavioral change. Risk-benefit assessment is especially important with cognitive impairment, psychosis, daytime somnolence, or falls.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="mao-b" data-mechanism="dopamine-breakdown" data-effects="sleep dyskinesia" data-search="rasagiline selegiline safinamide monoamine oxidase mao b inhibitor dopamine breakdown">
+            <summary><span class="topic-icon">MAO</span><span><strong>Monoamine oxidase-B inhibitors</strong><small>Rasagiline · selegiline · safinamide</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> MAO-B inhibition reduces central enzymatic breakdown of dopamine, increasing and prolonging dopaminergic activity. Selegiline and rasagiline are generally irreversible inhibitors at therapeutic exposure; safinamide is reversible and also modulates glutamatergic release through additional mechanisms.</p>
+              <p><strong>Clinical role:</strong> may provide modest symptomatic benefit as monotherapy in selected early disease or reduce OFF time as an adjunct to levodopa, depending on agent and local authorization.</p>
+              <p><strong>Clinical considerations:</strong> check the full medication list for interactions, including serotonergic and sympathomimetic medicines, and consult current product information. Insomnia may be relevant with selegiline; dyskinesia can increase when combined with levodopa. Do not assume agents in the class are interchangeable.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="comt" data-mechanism="levodopa-methylation" data-effects="nausea dyskinesia hepatic" data-search="entacapone opicapone tolcapone catechol o methyltransferase comt inhibitor levodopa">
+            <summary><span class="topic-icon">COMT</span><span><strong>Catechol-O-methyltransferase inhibitors</strong><small>Entacapone · opicapone · tolcapone</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> COMT inhibitors reduce levodopa methylation. Entacapone and opicapone act predominantly outside the central nervous system; tolcapone inhibits peripheral and central COMT. When used with levodopa, they prolong levodopa exposure and may extend ON time.</p>
+              <p><strong>Clinical role:</strong> adjunctive therapy for selected motor fluctuations; they are not used as stand-alone dopamine replacement.</p>
+              <p><strong>Clinical considerations:</strong> dyskinesia, diarrhea, nausea, hypotension, and urine discoloration can occur. Levodopa-related adverse effects may increase and require review of the overall regimen. Tolcapone carries serious hepatic risk and requires strict adherence to local restrictions and monitoring; verify current product guidance.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="amantadine" data-mechanism="glutamatergic" data-effects="hallucinations sleep" data-search="amantadine nmda glutamate dyskinesia dopamine release reuptake">
+            <summary><span class="topic-icon">NMDA</span><span><strong>Amantadine</strong><small>Glutamatergic modulation · dyskinesia</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> the full mechanism in PD is not completely established. NMDA-receptor antagonism and modulation of dopaminergic transmission are thought to contribute to its antidyskinetic effect.</p>
+              <p><strong>Clinical role:</strong> may reduce levodopa-induced dyskinesia and can have modest effects on motor symptoms in selected circumstances.</p>
+              <p><strong>Clinical considerations:</strong> confusion, hallucinations, ankle edema, livedo reticularis, and sleep disturbance are important considerations. Renal clearance is clinically relevant, so renal function and formulation-specific guidance matter. Abrupt discontinuation after sustained use may cause problems; tapering decisions belong with the prescriber.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="anticholinergic" data-mechanism="muscarinic" data-effects="hallucinations cognitive-anticholinergic" data-search="trihexyphenidyl benztropine anticholinergic muscarinic acetylcholine tremor">
+            <summary><span class="topic-icon">ACh</span><span><strong>Anticholinergic agents</strong><small>Trihexyphenidyl · benztropine</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> central muscarinic receptor antagonism reduces striatal cholinergic activity. This can partially rebalance dopaminergic-cholinergic signaling in basal ganglia circuits and may reduce tremor.</p>
+              <p><strong>Clinical role:</strong> limited, selective use for tremor-dominant symptoms; these agents have little effect on bradykinesia and are generally avoided when cognitive or autonomic vulnerability is significant.</p>
+              <p><strong>Clinical considerations:</strong> confusion, memory impairment, hallucinations, blurred vision, constipation, urinary retention, and heat intolerance are notable anticholinergic effects. Cognitive burden and falls are particularly important in older adults. Review the total anticholinergic load.</p>
+            </div>
+          </details>
+          <details class="topic-card medication-card" data-class="a2a" data-mechanism="adenosine" data-effects="dyskinesia hallucinations sleep" data-search="istradefylline adenosine a2a receptor antagonist indirect pathway">
+            <summary><span class="topic-icon">A2A</span><span><strong>Adenosine A2A receptor antagonist</strong><small>Istradefylline · adjunctive OFF-time reduction</small></span></summary>
+            <div class="topic-content">
+              <p><strong>Mechanism:</strong> adenosine A2A receptors are expressed in striatal neurons of the indirect basal ganglia pathway. Antagonism modulates this pathway and can facilitate movement without directly replacing dopamine.</p>
+              <p><strong>Clinical role:</strong> an adjunct to levodopa for selected adults experiencing OFF episodes where approved and available.</p>
+              <p><strong>Clinical considerations:</strong> dyskinesia, insomnia, hallucinations, and other adverse effects can occur. Check current local authorization, interactions, and product information before clinical use.</p>
+            </div>
+          </details>
+        </div>
+        <p id="medicationEmpty" class="empty-message" hidden>No medication topics match the current filters.</p>
+        <!-- اختبار ذاتي ضمن صفحة الأدوية -->
+        <section class="self-check" aria-labelledby="medicationCheckTitle">
+          <h3 id="medicationCheckTitle">Medication self-check</h3>
+          <details class="self-check-item"><summary>Where does carbidopa or benserazide mainly inhibit levodopa conversion?</summary><p><strong>Answer:</strong> Mainly in peripheral tissues.</p><p><strong>Why:</strong> The page explains that this increases the fraction of levodopa reaching the brain and reduces peripheral dopamine-related adverse effects.</p></details>
+          <details class="self-check-item"><summary>What is the main role of levodopa in the page’s medication summary?</summary><p><strong>Answer:</strong> It improves bradykinesia and rigidity and often tremor.</p><p><strong>Why:</strong> Levodopa is a dopamine precursor converted to dopamine in the brain.</p></details>
+          <details class="self-check-item"><summary>What do MAO-B inhibitors do?</summary><p><strong>Answer:</strong> They reduce central enzymatic breakdown of dopamine.</p><p><strong>Why:</strong> This increases and prolongs dopaminergic activity.</p></details>
+          <details class="self-check-item"><summary>What is the role of COMT inhibitors with levodopa?</summary><p><strong>Answer:</strong> They reduce levodopa methylation and can prolong levodopa exposure; selected agents may extend ON time.</p><p><strong>Why:</strong> They are adjunctive and are not stand-alone dopamine replacement.</p></details>
+          <details class="self-check-item"><summary>Name an important risk group to monitor with dopamine receptor agonists.</summary><p><strong>Answer:</strong> Impulse-control disorders, including gambling, compulsive shopping, hypersexuality, and binge eating.</p><p><strong>Why:</strong> The page also highlights nausea, orthostatic hypotension, hallucinations, and sudden sleep episodes.</p></details>
+        </section>
+      </section>
+
+      <!-- صفحة المضاعفات -->
+      <section class="content-section section-tint" id="complications">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> 06 · Clinical care</p>
+              <h2>Complications</h2>
+            </div>
+            <p>
+              Complications are multifactorial. Characterize their time
+              course, severity, contributors, and effect on safety and
+              function.
+            </p>
+          </div>
+          <aside class="key-points" aria-label="Key points">
+            <h3>Key points</h3>
+            <ul>
+              <li>Assess falls in relation to gait, orthostatic symptoms, dyskinesia, sensory or visual problems, cognition, medicines, and environment.</li>
+              <li>Ask about swallowing, nutrition, cognition, hallucinations, sleep, mood, pain, and medication timing.</li>
+              <li>Coordinate review across clinical, rehabilitation, communication, nutrition, and safety needs.</li>
+            </ul>
+          </aside>
+          <aside class="red-flags" aria-label="Red flags">
+            <h3>Red flags</h3>
+            <p>Acute choking or respiratory distress, syncope with injury, new acute confusion, sudden sleep episodes with safety risk, or early recurrent falls require timely assessment under local protocols.</p>
+          </aside>
+          <div class="topic-grid">
+            <details class="topic-card">
+              <summary><span class="topic-icon">01</span><span><strong>Falls, freezing, and mobility decline</strong><small>Gait, balance, environment, and medication state</small></span></summary>
+              <div class="topic-content">
+                <p>Falls may relate to freezing, impaired postural reflexes, orthostatic hypotension, dyskinesia, weakness, sensory impairment, visual problems, cognitive dual-task difficulty, sedating medicines, or environmental hazards. Ask about frequency, direction, injury, near-falls, circumstances, footwear, walking aids, and relation to medication timing.</p>
+                <p>Examine transfers, turning, gait initiation, stride, foot clearance, dual-task performance when safe, and postural responses with appropriate guarding. Consider physiotherapy, occupational therapy, medication review, vision and cardiovascular assessment, and bone-health or injury evaluation according to context. Early recurrent falls require reassessment for atypical features.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">02</span><span><strong>Orthostatic hypotension and autonomic dysfunction</strong><small>Symptoms, measurement, and secondary contributors</small></span></summary>
+              <div class="topic-content">
+                <p>Symptoms can include lightheadedness, blurred vision, weakness, presyncope, syncope, and falls on standing. Assess posture-related symptoms and measure supine-to-standing blood pressure and pulse using a safe, standardized procedure. Review hydration, meals, autonomic dysfunction, and medicines that lower blood pressure.</p>
+                <p>Distinguish neurogenic orthostatic hypotension from dehydration, blood loss, cardiac causes, and medication effects. Persistent or severe symptoms, syncope, injury, chest symptoms, or acute deterioration require timely clinical assessment under local protocols.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">03</span><span><strong>Dysphagia, aspiration, and nutrition</strong><small>Swallowing safety and respiratory consequences</small></span></summary>
+              <div class="topic-content">
+                <p>Look for coughing or choking with meals, prolonged eating, wet voice, drooling, difficulty with tablets, weight loss, dehydration, recurrent chest infection, and silent aspiration risk. Dysphagia may be under-recognized; absence of a volunteered complaint does not exclude it.</p>
+                <p>Arrange trained speech and language therapy assessment and instrumental evaluation when indicated. Nutrition and medication administration may need coordinated review. Acute choking, respiratory distress, or suspected aspiration with instability is an emergency.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">04</span><span><strong>Cognition, hallucinations, and psychosis</strong><small>Medication review and delirium exclusion</small></span></summary>
+              <div class="topic-content">
+                <p>Assess attention, executive and visuospatial function, orientation, fluctuation, sleep, mood, and functional change. Hallucinations may range from presence or passage phenomena to formed visual experiences; determine insight, distress, risk, timing, and relationship to illness or medicines.</p>
+                <p>New or acute confusion requires assessment for delirium, infection, metabolic disturbance, sleep disruption, and medication toxicity. Review dopaminergic and other psychoactive medicines with the responsible specialist; abrupt reduction can cause serious deterioration. Use local guidance for management.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">05</span><span><strong>Sleep and daytime somnolence</strong><small>REM sleep behavior disorder, insomnia, and sleep attacks</small></span></summary>
+              <div class="topic-content">
+                <p>Ask about dream enactment, injury during sleep, insomnia, nocturia, restless legs, sleep apnea symptoms, fragmented sleep, and excessive daytime sleepiness. Consider collateral history when appropriate and with consent. Distinguish sleepiness related to the disorder from medication effects and other sleep conditions.</p>
+                <p>Sudden sleep episodes can create serious safety risks, including while driving or operating machinery. Assess promptly, review medicines, and follow local safety and licensing requirements.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">06</span><span><strong>Mood, pain, fatigue, and quality of life</strong><small>Common burdens that can be missed in motor review</small></span></summary>
+              <div class="topic-content">
+                <p>Depression, anxiety, apathy, fatigue, and pain may precede motor diagnosis or emerge during disease progression. Pain can be musculoskeletal, dystonic, neuropathic, or central; fatigue may be influenced by sleep, mood, autonomic dysfunction, medication, and comorbidity.</p>
+                <p>Ask directly, use appropriate validated tools when trained, and assess for urgent psychiatric risk under local procedures. A motor-focused review alone may underestimate overall disease burden.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">07</span><span><strong>Motor fluctuations and dyskinesia</strong><small>Patterns, timing, and functional consequence</small></span></summary>
+              <div class="topic-content">
+                <p>Document OFF periods, delayed or failed ON, early-morning akinesia, predictable wearing-off, unpredictable fluctuations, dystonia, and dyskinesia. Record timing relative to medication, food, activity, and sleep, and determine which periods are most disabling.</p>
+                <p>Review adherence, formulation, absorption, and interactions with the specialist. A diary may clarify patterns for clinical review, but medication changes should not be made from a general educational resource.</p>
+              </div>
+            </details>
+            <details class="topic-card">
+              <summary><span class="topic-icon">08</span><span><strong>Speech, drooling, and communication</strong><small>Hypophonia, dysarthria, saliva control</small></span></summary>
+              <div class="topic-content">
+                <p>Reduced loudness, monotony, imprecise articulation, and rate changes can affect communication. Drooling may reflect reduced swallowing frequency rather than excess saliva production. Review oral health, swallowing, medication effects, and aspiration risk.</p>
+                <p>Speech and language therapy can assess communication and swallowing and provide individualized strategies. Rapid change, new focal neurological signs, or acute swallowing difficulty warrants prompt assessment.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- صفحة أدوار فريق الرعاية -->
+      <section class="content-section section-shell" id="care-team-roles">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> 07 · Multidisciplinary practice</p>
+            <h2>Roles across the care team</h2>
+          </div>
+          <p>
+            Coordinated expertise can address motor, non-motor, functional,
+            communication, and safety needs.
+          </p>
+        </div>
+        <aside class="key-points" aria-label="Key points">
+          <h3>Key points</h3>
+          <ul>
+            <li>Neurology or movement-disorder expertise supports diagnosis and complex treatment review.</li>
+            <li>Nursing and primary care support longitudinal monitoring, medication reconciliation, and coordination.</li>
+            <li>Physiotherapy, occupational therapy, speech and language therapy, pharmacy, dietetics, and mental health address complementary needs.</li>
+          </ul>
+        </aside>
+        <div class="topic-grid">
+          <details class="topic-card">
+            <summary><span class="topic-icon">MD</span><span><strong>Neurology and movement-disorder expertise</strong><small>Diagnostic formulation and complex treatment review</small></span></summary>
+            <div class="topic-content"><p>Establish and revisit the diagnosis, assess atypical features, coordinate dopaminergic treatment, evaluate fluctuations and adverse effects, and refer for specialist therapies or advanced treatment assessment when appropriate.</p></div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">RN</span><span><strong>Nursing and primary care</strong><small>Longitudinal monitoring and coordination</small></span></summary>
+            <div class="topic-content"><p>Support medication reconciliation, monitor general health and comorbidities, recognize changes in mobility or cognition, assess falls and autonomic symptoms, and coordinate follow-up with the multidisciplinary team.</p></div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">PT</span><span><strong>Physiotherapy</strong><small>Gait, balance, transfers, and physical activity</small></span></summary>
+            <div class="topic-content"><p>Assess mobility and falls risk; address gait, freezing, balance, strength, transfers, cueing strategies, and individualized exercise within professional scope and relevant safety guidance.</p></div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">OT</span><span><strong>Occupational therapy</strong><small>Activities, adaptation, and environmental access</small></span></summary>
+            <div class="topic-content"><p>Evaluate functional tasks, fine motor challenges, energy conservation, equipment, and environmental modifications that may support independence and reduce hazards.</p></div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">SLT</span><span><strong>Speech and language therapy</strong><small>Communication, voice, and swallowing</small></span></summary>
+            <div class="topic-content"><p>Assess voice, articulation, communication strategies, drooling, and swallowing; recommend further instrumental assessment when indicated and coordinate with nutrition and medical teams.</p></div>
+          </details>
+          <details class="topic-card">
+            <summary><span class="topic-icon">+</span><span><strong>Pharmacy, dietetics, and mental health</strong><small>Medication safety and whole-person clinical support</small></span></summary>
+            <div class="topic-content"><p>Pharmacists support medication reconciliation and interaction review; dietitians assess nutritional risk, weight change, and medication-food timing considerations; mental health professionals support mood, anxiety, cognition, and behavioral complications.</p></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- صفحة الإرشادات والمصادر المهنية -->
+      <section class="content-section section-tint" id="guidelines-and-professional-resources">
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> 08 · Further reading</p>
+              <h2>Guidelines and professional resources</h2>
+            </div>
+            <p>Check the original source for current recommendations, eligibility, and jurisdiction-specific details.</p>
+          </div>
+          <div class="topic-grid reference-grid">
+            <article class="resource-card">
+              <span class="tag">Guideline</span>
+              <h3>NICE guideline NG71</h3>
+              <p>Diagnosis and management of Parkinson’s disease, including multidisciplinary care and medicines review.</p>
+              <a href="https://www.nice.org.uk/guidance/ng71" target="_blank" rel="noopener noreferrer">Open NICE guideline ↗</a>
+            </article>
+            <article class="resource-card">
+              <span class="tag">Professional organization</span>
+              <h3>International Parkinson and Movement Disorder Society</h3>
+              <p>Professional education, evidence-based resources, and movement-disorder information.</p>
+              <a href="https://www.movementdisorders.org/" target="_blank" rel="noopener noreferrer">Visit the MDS website ↗</a>
+            </article>
+            <article class="resource-card">
+              <span class="tag">Evidence database</span>
+              <h3>PubMed</h3>
+              <p>Search biomedical literature and evaluate study design, limitations, and applicability.</p>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener noreferrer">Search PubMed ↗</a>
+            </article>
+          </div>
+          <p class="small-note">Clinical summaries on this page are educational and should be checked against current guidelines, local formularies, and specialist advice.</p>
+        </div>
+      </section>
+
+      <!-- قسم شكر المشرفين الأكاديميين -->
+      <section
+        class="content-section team-credit-section"
+        id="academic-supervisors"
+        aria-labelledby="teamCreditTitle"
+      >
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> Academic supervision</p>
+              <h2 id="teamCreditTitle">Academic Supervisors</h2>
+            </div>
+            <p>
+              With appreciation to the academic supervisors who supported this
+              educational resource.
+            </p>
+          </div>
+          <div class="team-credit-grid supervisor-grid">
+            <article class="team-credit-card">
+              <span class="team-credit-avatar" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false"><path d="M9 8.5c5-2 10-1.5 15 1.5v29c-5-3-10-3.5-15-1.5v-29Zm30 0c-5-2-10-1.5-15 1.5v29c5-3 10-3.5 15-1.5v-29Z"></path><path d="M14 15h5m-5 6h5m10-6h5m-5 6h5"></path></svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Academic supervisor</span>
+                <h3>Dr. Mohammed Fathy</h3>
+              </div>
+            </article>
+            <article class="team-credit-card">
+              <span class="team-credit-avatar supervisor-icon-clinical" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false"><path d="M14 8v11a10 10 0 0 0 20 0V8"></path><path d="M10 8h8m12 0h8M24 29v4a8 8 0 0 0 16 0v-2"></path><circle cx="40" cy="28" r="3"></circle><path d="M24 9v5"></path></svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Academic supervisor</span>
+                <h3>Dr. Ahmed Soliman</h3>
+              </div>
+            </article>
+            <article class="team-credit-card">
+              <span class="team-credit-avatar supervisor-icon-research" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false"><path d="M19 8h10m-8 0v12L11 37a3 3 0 0 0 2.5 4.5h21A3 3 0 0 0 37 37L27 20V8"></path><path d="M16 31h17m-11-6h5m-6-6h4"></path></svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Academic supervisor</span>
+                <h3>Dr. Seba Atta</h3>
+              </div>
+            </article>
+            <article class="team-credit-card">
+              <span class="team-credit-avatar supervisor-icon-academic" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false"><path d="m24 6 17 9-17 9L7 15l17-9Z"></path><path d="m13 19v10c6 6 16 6 22 0V19M41 15v13"></path><circle cx="41" cy="31" r="2"></circle></svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Academic supervisor</span>
+                <h3>Dr. Malak Elmokadem</h3>
+              </div>
+            </article>
+            <article class="team-credit-card">
+              <span class="team-credit-avatar supervisor-icon-care" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false"><path d="M24 7v34M7 24h34"></path><circle cx="24" cy="24" r="17"></circle></svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Academic supervisor</span>
+                <h3>Dr. Youssef Mahmoud</h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- قسم منشئ الموقع -->
+      <section
+        class="content-section team-credit-section creator-section"
+        id="website-developer"
+        aria-labelledby="creatorTitle"
+      >
+        <div class="section-shell">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow"><span></span> Design &amp; development</p>
+              <h2 id="creatorTitle">Website Developer</h2>
+            </div>
+            <p>Building a clear, structured experience for clinical learning.</p>
+          </div>
+          <div class="team-credit-grid creator-grid">
+            <article class="team-credit-card team-credit-creator">
+              <span class="team-credit-avatar creator-avatar" aria-hidden="true">
+                <svg viewBox="0 0 48 48" focusable="false">
+                  <rect x="7" y="9" width="34" height="24" rx="3"></rect>
+                  <path d="M18 40h12m-6-7v7M13 15h22v13H13z"></path>
+                  <path d="m19 23 3 3 7-7"></path>
+                </svg>
+              </span>
+              <div class="team-credit-copy">
+                <span class="team-credit-role">Website Developer</span>
+                <h3>Omar Ahmed</h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- قسم المراجع العلمية الأصلية -->
+      <section
+        class="content-section section-shell references-section"
+        id="references-and-further-reading"
+        aria-labelledby="referencesTitle"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> References</p>
+            <h2 id="referencesTitle">References &amp; Further Reading</h2>
+          </div>
+        </div>
+        <div class="references-groups">
+          <section class="references-group" aria-labelledby="reference-clinical-title">
+            <h3 id="reference-clinical-title">Clinical Overview &amp; Diagnosis</h3>
+            <div class="references-grid">
+              <article class="reference-card">
+                <h4>Parkinson's Disease – Clinical Review (NCBI Bookshelf)</h4>
+                <a href="https://www.ncbi.nlm.nih.gov/books/NBK470193/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>Parkinson's Disease – Nature Reviews Disease Primers</h4>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Parkinson%27s+disease+Nature+Reviews+Disease+Primers+2018" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>MDS Clinical Diagnostic Criteria for Parkinson's Disease (2015)</h4>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/26474316/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>A General Neurologist's Practical Diagnostic Algorithm for Atypical Parkinsonian Disorders (2024)</h4>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11341009/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>German Society for Neurology Guideline: Diagnosis and Treatment of Parkinson's Disease</h4>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11157782/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+            </div>
+          </section>
+          <section class="references-group" aria-labelledby="reference-assessment-title">
+            <h3 id="reference-assessment-title">Symptoms &amp; Clinical Assessment</h3>
+            <div class="references-grid">
+              <article class="reference-card">
+                <h4>Nonmotor Symptoms in Parkinson's Disease (2017)</h4>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/28511256/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>Parkinson's Disease Nonmotor Symptoms – Systematic Review Search</h4>
+                <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Parkinson+disease+nonmotor+symptoms+systematic+review" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>Movement Disorder Society – Unified Parkinson's Disease Rating Scale (MDS-UPDRS)</h4>
+                <a href="https://www.movementdisorders.org/MDS/MDS-Rating-Scales.htm" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+            </div>
+          </section>
+          <section class="references-group" aria-labelledby="reference-treatment-title">
+            <h3 id="reference-treatment-title">Medications &amp; Treatment</h3>
+            <div class="references-grid">
+              <article class="reference-card">
+                <h4>Pharmacotherapy of Motor Symptoms in Early and Mid-Stage Parkinson's Disease</h4>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11561004/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>American Academy of Neurology: Dopaminergic Therapy for Motor Symptoms in Early Parkinson Disease (2021)</h4>
+                <a href="https://www.neurology.org/doi/10.1212/WNL.0000000000012868" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>NICE Guideline NG71 – Diagnosis and Management of Parkinson's Disease</h4>
+                <a href="https://www.nice.org.uk/guidance/ng71/chapter/recommendations" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>NICE Guideline NG71 – Treatment and Advanced Parkinson's Disease</h4>
+                <a href="https://www.nice.org.uk/guidance/ng71" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+            </div>
+          </section>
+          <section class="references-group" aria-labelledby="reference-rehabilitation-title">
+            <h3 id="reference-rehabilitation-title">Rehabilitation &amp; Multidisciplinary Care</h3>
+            <div class="references-grid">
+              <article class="reference-card">
+                <h4>Physical Therapist Management of Parkinson Disease: Clinical Practice Guideline (2022)</h4>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9046970/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>Delivering Multidisciplinary Rehabilitation Care in Parkinson's Disease: International Consensus Statement</h4>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10836578/" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+              <article class="reference-card">
+                <h4>European Physiotherapy Guideline for Parkinson's Disease</h4>
+                <a href="https://www.parkinsons.org.uk/professionals/resources/european-physiotherapy-guideline-parkinsons-disease" target="_blank" rel="noopener noreferrer">Read Source</a>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <nav class="mobile-view-nav" id="mobileViewNav" aria-label="Section navigation" hidden>
+      <a id="mobilePrevious" href="#/home" aria-label="Previous section">Previous</a>
+      <span id="mobileCurrentView" aria-live="polite"></span>
+      <a id="mobileNext" href="#/core-concepts" aria-label="Next section">Next</a>
+    </nav>
+    <p class="visually-hidden" id="viewAnnouncement" role="status" aria-live="polite" aria-atomic="true"></p>
+
+    <!-- تذييل الموقع وروابطه والتنبيه الختامي -->
+    <footer class="site-footer">
+      <!-- التنبيه الختامي حول حدود الاستخدام -->
+      <section class="disclaimer-section footer-disclaimer" aria-labelledby="disclaimerTitle">
+        <div class="section-shell disclaimer-content">
+          <div>
+            <p class="eyebrow">Scope and limitations</p>
+            <h2 id="disclaimerTitle">Education supports—not replaces—clinical judgment.</h2>
+          </div>
+          <p>
+            This resource is intended for medical and nursing students and
+            healthcare professionals. It is not a diagnostic service, prescribing
+            protocol, or substitute for supervised clinical training, current
+            guidance, or individual assessment.
+          </p>
+        </div>
+      </section>
+      <div class="section-shell footer-inner">
+        <a class="footer-brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span>Parkinson’s Clinical Learning Resource</span>
+        </a>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="#academic-supervisors">Academic Supervisors</a>
+          <a href="#website-developer">Website Developer</a>
+          <a href="#guidelines-and-professional-resources">Further reading</a>
+        </nav>
+        <div class="footer-meta">
+          <p>© <span id="currentYear">2026</span> Parkinson’s Clinical Learning Resource</p>
+          <a href="#home">Back to top <span aria-hidden="true">↑</span></a>
+        </div>
+      </div>
+    </footer>
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top" hidden>
+      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="m5 12 7-7 7 7M12 5v14"></path></svg>
+    </button>
+    <button class="accordion-toggle-floating" id="accordionToggle" type="button" aria-label="Expand all topics" title="Expand all topics" aria-expanded="false">
+      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M8 3H3v5m0-5 6 6m7-6h5v5m0-5-6 6M3 16v5h5m-5 0 6-6m13 0v6h-5m5 0-6-6"></path></svg>
+    </button>
+  </body>
+</html>
